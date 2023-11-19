@@ -56,7 +56,7 @@ class ProdutoService {
         });
 
         if (!produto) {
-            throw new Error('Produto informado não cadastrado!')
+            throw new Error('Produto informado não cadastrado!');
         }
 
         try {
