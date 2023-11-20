@@ -13,16 +13,26 @@ describe('Testes do carrinho', () => {
     const item = new Item('Banana', 2, 5);
     const item2 = new Item('maça', 0.5, 1);
 
+    expect(typeof item).toBe('object');
+    expect(typeof item2).toBe('object');
+
     const carrinho = new Carrinho();
     carrinho.adiciona(item);
     carrinho.adiciona(item2);
 
     expect(typeof carrinho).toBe('object');
+    expect(Array.isArray(carrinho.itens)).toBe(true);// verifica se o método isArray retorna true
     expect(carrinho.itens[0]).toBe(item);
     expect(carrinho.itens[1]).toBe(item2);
 
     expect(carrinho.itens).toContain(item);
     expect(carrinho.itens).toContain(item2);
+  });
+
+  it('A propriedade "itens" deve ser um array', () => {
+    const carrinho = new Carrinho();
+    expect(Array.isArray(carrinho.itens)).toBe(true);
+    // verifica se o isArray que retorna true se for array, é igual a true
   });
 
   it('Deve ter propriedade "total" na inicialização', () => {
@@ -32,12 +42,17 @@ describe('Testes do carrinho', () => {
   });
 
   it('Deve lançar erro ao finalizar compra com carrinho vazio', () => {
-    function englobaErroCarrinho() {
+    function englobaErroCarrinho() { // usa a função para capturar o comportamento que gera erro
       const carrinho = new Carrinho();
       carrinho.finalizaCompra();
     }
 
     expect(englobaErroCarrinho).toThrowError('Carrinho de compras vazio');
+    // verifica se o erro é igual ao que deve ser mostrado
+    expect(() => { // forma alternativa
+      const carrinho = new Carrinho();
+      carrinho.finalizaCompra();
+    }).toThrowError('Carrinho de compras vazio');
   });
 
   it('Deve adicionar o frete', () => {

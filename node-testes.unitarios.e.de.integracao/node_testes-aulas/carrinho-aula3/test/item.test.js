@@ -6,7 +6,9 @@ describe('Testes dos itens', () => {
   it('Deve ter 3 campos: nome, valor, quantidade', () => {
     const item = new Item('Beterraba', 2.5, 10);
 
-    expect(item.nome).toBe('Beterraba');
+    expect(typeof item).toBe('object'); // verifica se é um objeto
+    expect(item.nome).toBe('Beterraba'); // Verifica se é igual a beterraba
+    expect(item.nome).toEqual(expect.stringContaining('Bete'));// verifica se tem a string
     expect(item.valor).toBe(2.5);
     expect(item.quantidade).toBe(10);
   });
