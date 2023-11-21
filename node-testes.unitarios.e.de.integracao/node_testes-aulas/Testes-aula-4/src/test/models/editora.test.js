@@ -13,6 +13,7 @@ describe('Testando o modelo Editora', () => {
   it('Deve instanciar uma nova editora', () => {
     const editora = new Editora(objetoEditora);
 
+    expect(typeof editora).toBe('object')
     expect(editora).toEqual(
       expect.objectContaining(objetoEditora),
     );

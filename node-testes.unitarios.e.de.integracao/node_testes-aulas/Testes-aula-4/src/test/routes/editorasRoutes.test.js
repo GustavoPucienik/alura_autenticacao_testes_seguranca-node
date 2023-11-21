@@ -8,8 +8,8 @@ beforeEach(() => {
   server = app.listen(port);
 });
 
-afterEach(() => {
-  server.close();
+afterEach((done) => {
+  server.close(done);
 });
 
 describe('GET em /editoras', () => {
