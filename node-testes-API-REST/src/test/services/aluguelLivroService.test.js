@@ -15,6 +15,7 @@ describe('Testando AlguelLivroService', () => {
         .calcularDataDevolucao(dataAlugado, numeroDiasAlugados);
 
       expect(dataDevolucao).toStrictEqual(dataDevolucaoMock);
+      // testando comando git remote
     },
   );
 });
