@@ -9,18 +9,18 @@ class AuthService {
       if (!data.email) {
         throw new Error('O email do usuario é obrigatório.');
       }
-  
+
       if (!data.senha) {
         throw new Error('A senha de usuario é obrigatório.');
       }
 
-      const usuario = await Usuario.pegarPeloEmail(data.email);
+      const usuario = await Usuario.pegarPeloEmail(this.data.email);
 
       if (!usuario) {
         throw new Error('Usuario não cadastrado.');
       }
 
-      const senhaIguais = await bcryptjs.compare(data.senha, usuario.senha);
+      const senhaIguais = await bcryptjs.compare(this.data.senha, usuario.senha);
 
       if (!senhaIguais) {
         throw new Error('Usuario ou senha invalido.');
@@ -40,8 +40,11 @@ class AuthService {
   }
 
   async cadastrarUsuario(data) {
-    data.senha = await bcryptjs.hash(data.senha, 8);
-    
+    if (!data.senha) {
+      throw new Error('A senha de usuario é obrigatório.');
+    }
+    this.data.senha = await bcryptjs.hash(data.senha, 8);
+
     const usuario = new Usuario(data);
     try {
       const resposta = await usuario.salvar(usuario);
