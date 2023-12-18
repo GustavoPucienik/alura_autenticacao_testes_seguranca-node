@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import Autor from '../models/autor.js';
 
 class AutoresController {
@@ -72,8 +73,12 @@ class AutoresController {
   static pegarLivrosPeloAutor = async (req, res) => {
     const { params } = req;
     try {
-      const listaLivros = await Autor.pegarLivrosPeloAutor(params.id);
       const autor = await Autor.pegarPeloId(params.id);
+      const listaLivros = await Autor.pegarLivrosPeloAutor(params.id);
+      // adicionando a condição para retornar 404
+      if (!autor) {
+        return res.status(404).json({ message: `id ${params.id} não encontrado` });
+      }
       res.status(200).json({ autor, livros: listaLivros });
     } catch (error) {
       res.status(500).json(error.message);
