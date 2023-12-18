@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import {
-  describe, expect, it, jest,
+  describe, expect, it,
 } from '@jest/globals';
 import Evento from '../../models/evento.js';
 
